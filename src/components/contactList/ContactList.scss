@@ -1,0 +1,48 @@
+.contact_list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 350px;
+  height: auto;
+}
+
+// !! CONTACT ANIMATION
+.list_item-enter-active {
+  animation: anime_ahead 250ms ease-in alternate-reverse;
+}
+
+.list_item-exit-active {
+  animation: anime_astern 250ms ease-in;
+}
+
+@keyframes anime_ahead {
+  0% {
+    transform: translateX(0);
+  }
+
+  30% {
+    opacity: 0.7;
+    transform: translateX(30px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes anime_astern {
+  0% {
+    transform: translateX(0);
+  }
+
+  30% {
+    opacity: 0.7;
+    transform: translateX(30px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}

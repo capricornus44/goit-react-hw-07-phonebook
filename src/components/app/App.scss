@@ -1,0 +1,100 @@
+.app_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 1170px;
+  height: 100vh;
+  padding: 0 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  // background-color: #181a1b;
+  // background-color: #282c34;
+}
+
+.app_title {
+  color: #4459e2;
+  margin-bottom: 10px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+  height: auto;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #2f3c87;
+
+  // background-color: #ffffff;
+  background-color: #1c1f20;
+  box-shadow: 0 4px 6px 4px rgba(0, 0, 0, 0.2);
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+// !! APPLICATION TITLE ANIMATION
+.title_slider-appear-active {
+  animation: anime 500ms ease-in alternate-reverse;
+}
+
+@keyframes anime {
+  0% {
+    transform: translateX(0);
+  }
+
+  30% {
+    opacity: 0.5;
+    transform: translateX(30px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
+
+// !! CONTACTS FILTER ANIMATION
+.filter_animation-enter-active {
+  animation: filter_anime_ahead 250ms ease-in alternate-reverse;
+}
+
+.filter_animation-exit-active {
+  animation: filter_anime_astern 250ms ease-in;
+}
+
+@keyframes filter_anime_ahead {
+  0% {
+    transform: translateX(0);
+  }
+
+  30% {
+    opacity: 0.7;
+    transform: translateX(30px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes filter_anime_astern {
+  0% {
+    transform: translateX(0);
+  }
+
+  30% {
+    opacity: 0.7;
+    transform: translateX(30px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
