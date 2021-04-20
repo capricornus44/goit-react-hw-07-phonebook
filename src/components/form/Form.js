@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { addContact } from '../../redux/phonebook/operations/contacts-operations';
-import { filterSelector, itemsSelector } from '../../redux/phonebook/selectors/contact-selectors';
+import {
+  filterSelector,
+  itemsSelector,
+} from '../../redux/phonebook/selectors/contact-selectors';
 import 'react-toastify/dist/ReactToastify.css';
 import './Form.scss';
 
@@ -27,7 +30,9 @@ class Form extends Component {
 
     const { name, number } = this.state;
     const { contacts } = this.props;
-    const isExists = contacts.find(contact => contact.name === name);
+    const isExists = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase(),
+    );
 
     if (isExists) {
       toast.error('This contact is already exist');
