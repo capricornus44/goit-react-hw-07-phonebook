@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteContact } from '../../redux/phonebook/actions/contact-action';
+import { deleteContact } from '../../redux/phonebook/operations/contacts-operations';
+import { getContactById } from '../../redux/phonebook/selectors/contact-selectors';
 import './SingleContact.scss';
 
 const SingleContact = ({ name, number, deleteContact }) => {
@@ -16,9 +17,7 @@ const SingleContact = ({ name, number, deleteContact }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const contact = state.contacts.items.find(
-    contact => contact.id === ownProps.id,
-  );
+  const contact = getContactById(state, ownProps.id);
   return { ...contact };
 };
 
@@ -27,7 +26,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 SingleContact.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string,
   number: PropTypes.string,
   deleteContact: PropTypes.func.isRequired,

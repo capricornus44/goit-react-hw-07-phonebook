@@ -1,8 +1,9 @@
-import { connect } from "react-redux"
-import PropTypes from "prop-types"
-import { TransitionGroup, CSSTransition } from "react-transition-group"
-import SingleContact from "../singleContact/SingleContact"
-import "./ContactList.scss"
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { getFilteredContact } from '../../redux/phonebook/selectors/contact-selectors';
+import SingleContact from '../singleContact/SingleContact';
+import './ContactList.scss';
 
 const ContactList = ({ contacts }) => {
   return (
@@ -13,19 +14,16 @@ const ContactList = ({ contacts }) => {
         </CSSTransition>
       ))}
     </TransitionGroup>
-  )
-}
-const mapStateToProps = (state) => {
-  const { items, filter } = state.contacts
-  const normalizedFilter = filter.toLowerCase()
+  );
+};
 
-  const getMatchingContact = items.filter((contact) => contact.name.toLowerCase().includes(normalizedFilter))
+const mapStateToProps = state => {
   return {
-    contacts: getMatchingContact,
-  }
-}
+    contacts: getFilteredContact(state),
+  };
+};
 
-export default connect(mapStateToProps)(ContactList)
+export default connect(mapStateToProps)(ContactList);
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
@@ -33,6 +31,6 @@ ContactList.propTypes = {
       name: PropTypes.string,
       id: PropTypes.string,
       number: PropTypes.string,
-    })
+    }),
   ).isRequired,
-}
+};

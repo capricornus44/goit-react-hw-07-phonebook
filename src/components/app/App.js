@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { ToastContainer } from 'react-toastify';
-import { storageContact } from '../../redux/phonebook/actions/contact-action';
+import { getContacts } from '../../redux/phonebook/operations/contacts-operations';
+import { itemsSelector } from '../../redux/phonebook/selectors/contact-selectors';
 import Form from '../form/Form';
 import Filter from '../filter/Filter';
 import ContactList from '../contactList/ContactList';
@@ -14,21 +15,11 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.props.onGetContacts();
+
     this.setState(state => ({
       animation: !state.animation,
     }));
-
-    const savedContacts = localStorage.getItem('contacts');
-    if (savedContacts) {
-      this.props.storageContact(JSON.parse(savedContacts));
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { contacts } = this.props;
-    if (prevProps.contacts !== contacts) {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-    }
   }
 
   render() {
@@ -73,10 +64,12 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  contacts: state.contacts.items,
+  contacts: itemsSelector(state),
 });
+
 const mapDispatchToProps = {
-  storageContact,
+  onGetContacts: getContacts,
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

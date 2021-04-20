@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
-import { addContact } from '../../redux/phonebook/actions/contact-action';
+import { addContact } from '../../redux/phonebook/operations/contacts-operations';
+import { filterSelector, itemsSelector } from '../../redux/phonebook/selectors/contact-selectors';
 import 'react-toastify/dist/ReactToastify.css';
 import './Form.scss';
 
@@ -82,8 +83,8 @@ class Form extends Component {
 }
 
 const mapStateToProps = state => ({
-  contacts: state.contacts.items,
-  filter: state.contacts.filter,
+  contacts: itemsSelector(state),
+  filter: filterSelector(state),
 });
 
 const mapDispatchToProps = {
