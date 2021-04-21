@@ -21,20 +21,21 @@ export const getContacts = () => async dispatch => {
       id: key,
       ...response.data[key],
     }));
-    dispatch(getContactsSuccess(contacts));
+    contacts && dispatch(getContactsSuccess(contacts));
   } catch (error) {
     dispatch(getContactsError(error));
   }
 };
 
-export const addContact = (name, number) => async dispatch => {
+export const addContact = contact => async dispatch => {
   dispatch(addContactRequest());
   try {
     const response = await axios.post(
       `https://phonebook-react-default-rtdb.firebaseio.com/contacts.json`,
-      { name, number },
+      contact,
     );
-    dispatch(addContactSuccess({ id: response.data.name, name, number }));
+    response.data &&
+      dispatch(addContactSuccess({ id: response.data.name, ...contact }));
   } catch (error) {
     dispatch(addContactError(error));
   }

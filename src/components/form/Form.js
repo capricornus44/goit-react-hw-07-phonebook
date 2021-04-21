@@ -29,6 +29,7 @@ class Form extends Component {
     event.preventDefault();
 
     const { name, number } = this.state;
+    const contact = { name, number };
     const { contacts } = this.props;
     const isExists = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase(),
@@ -36,11 +37,10 @@ class Form extends Component {
 
     if (isExists) {
       toast.error('This contact is already exist');
-
       return this.setState({ ...initState });
     }
 
-    this.props.addContact(name, number);
+    this.props.addContact(contact);
     this.setState({ ...initState });
   };
 
