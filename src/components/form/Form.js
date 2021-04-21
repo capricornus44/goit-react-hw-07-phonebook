@@ -31,7 +31,7 @@ class Form extends Component {
     const { name, number } = this.state;
     const contact = { name, number };
     const { contacts } = this.props;
-    const isExists = contacts.find(
+    const isExists = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase(),
     );
 
