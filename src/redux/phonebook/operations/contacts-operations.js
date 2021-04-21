@@ -17,11 +17,13 @@ export const getContacts = () => async dispatch => {
     const response = await axios.get(
       `https://phonebook-react-default-rtdb.firebaseio.com/contacts.json`,
     );
-    const contacts = Object.keys(response.data).map(key => ({
-      id: key,
-      ...response.data[key],
-    }));
-    contacts && dispatch(getContactsSuccess(contacts));
+    if (response.data) {
+      const contacts = Object.keys(response.data).map(key => ({
+        id: key,
+        ...response.data[key],
+      }));
+      dispatch(getContactsSuccess(contacts));
+    }
   } catch (error) {
     dispatch(getContactsError(error));
   }
